@@ -78,25 +78,19 @@ void USARTx_CFG(void)
     GPIO_InitTypeDef  GPIO_InitStructure = {0};
     USART_InitTypeDef USART_InitStructure = {0};
 
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2 | RCC_APB1Periph_USART3, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB, ENABLE);
+    RCC_APB1PeriphClockCmd( RCC_APB1Periph_USART3, ENABLE);
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC, ENABLE);
 
-    /* USART2 TX-->A.2   RX-->A.3 */
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+    /* USART2 TX-->C.18   RX-->C.19 */
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_18;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_19;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
-    /* USART3 TX-->B.3  RX-->B.4 */
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+
 
     USART_InitStructure.USART_BaudRate = 115200;
     USART_InitStructure.USART_WordLength = USART_WordLength_8b;
@@ -104,9 +98,6 @@ void USARTx_CFG(void)
     USART_InitStructure.USART_Parity = USART_Parity_No;
     USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
     USART_InitStructure.USART_Mode = USART_Mode_Tx | USART_Mode_Rx;
-
-    USART_Init(USART2, &USART_InitStructure);
-    USART_Cmd(USART2, ENABLE);
 
     USART_Init(USART3, &USART_InitStructure);
     USART_Cmd(USART3, ENABLE);
@@ -128,12 +119,12 @@ int main(void)
     printf("SystemClk:%d\r\n", SystemCoreClock);
     printf( "ChipID:%08x\r\n", DBGMCU_GetCHIPID() );
     printf("USART Polling TEST\r\n");
-    USARTx_CFG(); /* USART2 & USART3 INIT */
+    USARTx_CFG();
 
     while(TxCnt < TxSize)
     {
-        USART_SendData(USART2, TxBuffer[TxCnt++]);
-        while(USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET)
+        USART_SendData(USART3, TxBuffer[TxCnt++]);
+        while(USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET)
         {
             /* waiting for sending finish */
         }

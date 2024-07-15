@@ -11,23 +11,11 @@ APP_C_SRCS += \
 
 
 SDK_Peripheral_C_SRCS += \
-  $(SDK_PATH)/Peripheral/ch32x035_adc.c \
-  $(SDK_PATH)/Peripheral/ch32x035_awu.c \
   $(SDK_PATH)/Peripheral/ch32x035_dbgmcu.c \
-  $(SDK_PATH)/Peripheral/ch32x035_dma.c \
-  $(SDK_PATH)/Peripheral/ch32x035_exti.c \
-  $(SDK_PATH)/Peripheral/ch32x035_flash.c \
-  $(SDK_PATH)/Peripheral/ch32x035_gpio.c \
-  $(SDK_PATH)/Peripheral/ch32x035_i2c.c \
-  $(SDK_PATH)/Peripheral/ch32x035_iwdg.c \
   $(SDK_PATH)/Peripheral/ch32x035_misc.c \
-  $(SDK_PATH)/Peripheral/ch32x035_opa.c \
-  $(SDK_PATH)/Peripheral/ch32x035_pwr.c \
   $(SDK_PATH)/Peripheral/ch32x035_rcc.c \
-  $(SDK_PATH)/Peripheral/ch32x035_spi.c \
-  $(SDK_PATH)/Peripheral/ch32x035_tim.c \
   $(SDK_PATH)/Peripheral/ch32x035_usart.c \
-  $(SDK_PATH)/Peripheral/ch32x035_wwdg.c
+  $(SDK_PATH)/Peripheral/ch32x035_gpio.c \
 
 SDK_CORE_C_SRCS += \
   $(SDK_PATH)/Core/core_riscv.c
@@ -167,5 +155,5 @@ obj/sdk/%.o: $(SDK_PATH)/%.S
 f: clean all  
 	wchisp flash ./main.elf
 
-flash: 
+flash: main.elf
 	wchisp flash ./main.elf

@@ -78,8 +78,10 @@ void USARTx_CFG(void)
     GPIO_InitTypeDef  GPIO_InitStructure = {0};
     USART_InitTypeDef USART_InitStructure = {0};
 
+    
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_AFIO | RCC_APB2Periph_GPIOC, ENABLE);
     RCC_APB1PeriphClockCmd( RCC_APB1Periph_USART3, ENABLE);
-    RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC, ENABLE);
+    GPIO_PinRemapConfig(GPIO_Remap_SWJ_Disable, ENABLE);
 
     /* USART2 TX-->C.18   RX-->C.19 */
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_18;

@@ -55,7 +55,7 @@ SECONDARY_SIZE := main.siz
 
 
 CFLAGS_COMMON := \
-  -march=rv32imacxw \
+  -march=rv32imac \
   -mabi=ilp32 \
   -msmall-data-limit=8 \
   -msave-restore \

@@ -381,13 +381,13 @@ int main(void)
     PIOC_INIT();
     PIOC_UART_INIT(PIOC_baudrate,PIOC_parity,PIOC_stopbits,PIOC_word_lenth);
     R8_CTRL_WR = 0X33;                  // To R8_CTRL_WR write any value,then start
-    PIOC_UART_SEND(pbuf1,sizeof(pbuf1));
-    Delay_Ms(1000);
+    // PIOC_UART_SEND(pbuf1,sizeof(pbuf1));
+    // Delay_Ms(1000);
 
-    uint8_t buff[] ={'L',1,2,3,4,5,6,7,8,9,0,'F'};
+    u8 buff[] ={'\r','\n','L','1','2','3','4','5','6','7','8','9','10','F','\r','\n'};
     while(1)
     {
         PIOC_UART_SEND(buff,sizeof(buff));
-        Delay_Ms(500);
+        Delay_Ms(1);
     }
 }
